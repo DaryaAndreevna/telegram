@@ -1,0 +1,27 @@
+<%= form_for :weekly_collection, url: create_collection_admin_appointments_path, html: { class: 'formtastic' } do |f| %>
+
+	<fieldset class="inputs">
+		<div style="text-align: center; padding: 30px; width: 100%">
+			<p> Создание записей 12:00 14:00 16:00 18:00 </p>
+			<p> На каждый день текущей недели </p>
+		</div>
+	</fieldset>
+	<fieldset class="inputs">
+		<ol>
+			<li class="select input required">
+	    	<%= f.label :place %>
+	    	<%= f.select :place_id, Place.all.map{|s| [s.name, s.id] } %>
+	   	</li>
+
+		  <li class="select input required">
+		    <%= f.label :squad %>
+		    <%= f.select :squad_ids, options_for_select(Squad.active.map{|s| [s.name, s.id] }), {}, { multiple: true, include_blank: false }%>
+		  </li>
+		</ol>
+
+	</fieldset>
+
+  <fieldset class="actions">
+    <%= f.submit %>
+  </fieldset>
+<% end %>
